@@ -1,17 +1,62 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { imgs, categories } from '../data'
+import { CategoryCard } from './CategoryCard';
+const [
+    imgCiencias,
+    imgDeportes,
+    imgFilosofia,
+    imgGeografia,
+    imgHistoria,
+    imgLiteratura,
+    imgTecnologia
+] = imgs
+
 
 export const CategoryList = () => {
     return (
         <div className='flex flex-row flex-wrap justify-center gap-4 mt-10'>
-            <Link to ={`/category/${algo}`} className='flex flex-col justify-between basis-1/4 bg-slate-500 rounded-2xl overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500 transition-all hover:scale-105'>
-                <div className='p-5 flex justify-center items-center'>
-                    <img src={algo} alt={`categoria`} className='w-36'/>
-                </div>
-                <h1 className='text-2xl font-semibold text-stone-100 bg-stone-800 bg-opacity-60 p-3 px-5'>
-
-                </h1>
-            </Link>
+            <CategoryCard
+                category={categories.ciencia}
+                src={imgCiencias}
+                alt={`Categoria ${categories.ciencia}`}
+                gradientColor={' from-purple-500 to-pink-500'}
+            />
+            <CategoryCard
+                category={categories.deportes}
+                src={imgDeportes}
+                alt={`Categoria ${categories.deportes}`}
+                gradientColor={'from-green-500 to-yellow-500'}
+            />
+            <CategoryCard
+                category={categories.filosofia}
+                src={imgFilosofia}
+                alt={`Categoria ${categories.filosofia}`}
+                gradientColor={'from-blue-500 to-red-500'}
+            />
+            <CategoryCard
+                category={categories.geografia}
+                src={imgGeografia}
+                alt={`Categoria ${categories.geografia}`}
+                gradientColor={'from-red-500 to-black-500'}
+            />
+            <CategoryCard
+                category={categories.historia}
+                src={imgHistoria}
+                alt={`Categoria ${categories.historia}`}
+                gradientColor={'from-blue-500 to-orange-500'}
+            />
+            <CategoryCard
+                category={categories.literatura}
+                src={imgLiteratura}
+                alt={`Categoria ${categories.literatura}`}
+                gradientColor={'from-pink-500 to-black-500'}
+            />
+            <CategoryCard
+                category={categories.tecnologia}
+                src={imgTecnologia}
+                alt={`Categoria ${categories.tecnologia}`}
+                gradientColor={'from-gray-500 to-green-500'}
+            />
         </div>
     );
 };
