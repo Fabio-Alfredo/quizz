@@ -18,16 +18,25 @@ export const CategoryPage = () => {
         questions.filter(question => question.category === category)
     )
 
+    const [indexQuestion, setIndexQuestion] = useState(0)
+    const [resetQuizz, setResetQizz] = useState(false)
+
+
     useEffect(() => {
-        const newQuestions = shuffleArray(questionFiltered)
-        setQuestionFiltered(newQuestions)
-    }, [])
+
+        const newQuestions = shuffleArray(questionFiltered);
+        setQuestionFiltered(newQuestions);
+        if (resetQuizz) {
+            setIndexQuestion(0);
+            setResetQizz(false);
+        }
+    }, [resetQuizz])
 
     return (
         <div className='container flex flex-col items-center justify-center gap-10'
             style={{ height: 'calc(100vh - 5rem)' }}
         >
-            <Question/>
+            <Question filteredQuestion={questionFiltered[indexQuestion]} setIndexQuestion={setIndexQuestion} indexQuestion={indexQuestion} questionFiltered={questionFiltered} reset={setResetQizz} />
         </div>
     );
 };
