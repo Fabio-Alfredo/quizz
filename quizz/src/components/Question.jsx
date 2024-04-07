@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Results } from './Results';
 
 export const Question = ({ filteredQuestion, questionFiltered, indexQuestion, setIndexQuestion, reset }) => {
 
@@ -40,28 +40,7 @@ export const Question = ({ filteredQuestion, questionFiltered, indexQuestion, se
     return (
         <>
             {activateResult ? (
-                <div className='flex flex-col justify-evenly items-center shadow-xl rounded-lg w-[600px] h-[600px] gap-5' >
-                    <h1 className='text-4xl font-bold'>
-                        resultado
-                    </h1>
-                    <div className='flex flex-col gap-5 text-center text-lg font-bold'>
-                        <span>
-                            acertaste
-                        </span>
-                        <span className='font-black bg-gradient-to-t from-purple-400 to-pink-300 bg-clip-text text-transparent text-6xl animate-pulse'>
-                            {((score / questionFiltered.length) * 100).toFixed(0)}%
-                        </span>
-                        de las preguntas {score} de {questionFiltered.length}
-                    </div>
-                    <Link to={'/'}>
-                        <button className='border px-5 py-2 rounded-lg transition-all font-bold hover:bg-yellow-400 hover:text-gray-900' onClick={() => {
-                            reset(true)
-                            setScore(0)
-                        }}>
-                            vamos de nuevo
-                        </button>
-                    </Link>
-                </div>
+                <Results questionFiltered={questionFiltered} score={score} setScore={setScore} reset={reset}/>
             ) : (
                 <div className='flex flex-col justify-between shadow-md shadow-slate-300 w-[600px] h-[600px] p-10 rounded-lg'>
                     <div className='flex justify-between'>
@@ -93,9 +72,15 @@ export const Question = ({ filteredQuestion, questionFiltered, indexQuestion, se
                     <div className='grid grid-cols-2 gap-5'>
                         {
                             answerRandom.map((answer, index) => (
-                                <button className='border p-5 rounded-lg flex justify-center items-center hover:scale-105'
+                                <button className={`border p-5 rounded-lg flex justify-center items-center hover:scale-105 ${
+                                    selectAnswerIndex!==null && 
+                                    index === selectAnswerIndex 
+                                    ? answer === filteredQuestion.correct_answer 
+                                    ? 'bg-green-500':'bg-red-500':''
+                                }`}
                                     key={answer}
                                     onClick={() => checkAnswer(answer, index)}
+                                    disabled ={answered && selectAnswerIndex !==index}
                                 >
                                     <p className='font-medium text-center text-sm'>
                                         {answer}
