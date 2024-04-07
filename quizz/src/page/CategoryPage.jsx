@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { questions } from '../data';
+import { Question } from '../components';
 
 const shuffleArray = (array) => {
 
@@ -26,7 +27,7 @@ export const CategoryPage = () => {
         <div className='container flex flex-col items-center justify-center gap-10'
             style={{ height: 'calc(100vh - 5rem)' }}
         >
-            page
+            <Question/>
         </div>
     );
 };
